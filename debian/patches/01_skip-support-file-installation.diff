@@ -1,0 +1,16 @@
+--- a/setup.py
++++ b/setup.py
+@@ -58,12 +58,7 @@ py2exe_params = {
+ if len(sys.argv) >= 2 and sys.argv[1] == 'py2exe':
+     params = py2exe_params
+ else:
+-    files_spec = [
+-        ('etc/bash_completion.d', ['youtube-dl.bash-completion']),
+-        ('etc/fish/completions', ['youtube-dl.fish']),
+-        ('share/doc/youtube_dl', ['README.txt']),
+-        ('share/man/man1', ['youtube-dl.1'])
+-    ]
++    files_spec = []
+     root = os.path.dirname(os.path.abspath(__file__))
+     data_files = []
+     for dirname, files in files_spec:

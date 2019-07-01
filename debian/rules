@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME = youtube_dl
+export PATH := $(CURDIR)/debian/utils:$(PATH)
+
+%:
+	dh $@ --buildsystem=pybuild --with python3,quilt,bash-completion
+
+override_dh_auto_configure:
+	PREFIX=/usr SYSCONFDIR=/etc make
+	mv Makefile Makefile.inactive
+	rm youtube-dl
+
+override_dh_clean:
+	test -f Makefile || mv Makefile.inactive Makefile
+	make clean
+	dh_clean CONTRIBUTING.md
+
+override_dh_auto_test:
